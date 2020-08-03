@@ -1,0 +1,44 @@
+1.Display the Department of Gokkul
+-> select dep_name from department where dep_id in(select dep_id from student where stu_name='Gokkul');
+2.Display the names of the students who paid the tution fee more than the average of the same
+-> select stu_name from student where stu_id in(select t_id from fees where tution_fee>(select avg(tution_fee) from fees));
+3.Display the join date of Sri Devi
+-> select join_date from joins where stu_id in(select stu_id from student where stu_name='Sri Devi');
+4.What is the average course fee?
+-> select avg(course_fee) from course;
+5.How many symposiums are conducted in CEG?(clg_code=1)
+-> select count(symp_name) from symposium where clg_code=1;
+6.Who is the chief guest for CSE department symposium in PSG Tech
+There are two ways:
+-> select chief_guest from symposium where dep_id in(select dep_id from department where dep_name='CSE') and clg_code in(select clg_code from college where clg_name='PSG Tech');
+
+-> select chief_guest from symposium where dep_id in(select dep_id from department where dep_name='CSE')
+   intersect
+   select chief_guest from symposium where clg_code in(select clg_code from college where clg_name='PSG Tech');
+7.Display the tution fee and hostel fee of Nikhil Kumar
+-> select tution_fee,hostel_fee from fees where t_id in(select stu_id from student where stu_name='Nikhil Kumar');
+8.Madan Gowri is the chief guest of which symposium?
+-> select symp_name from symposium where chief_guest='Madan Gowri';
+9.Display the names of students who belong to CSE or ECE
+-> select stu_name from student where dep_id in(select dep_id from department where dep_name='CSE')
+   union
+   select stu_name from student where dep_id in(select dep_id from department where dep_name='ECE');
+10.Display the number of students who are from CEG Campus and belong to CSE
+-> select count(stu_id) from student where stu_id in(
+   select stu_id from student where dep_id in(select dep_id from department where dep_name='CSE')
+   intersect
+   select stu_id from joins where clg_code in(select clg_code from college where clg_name='CEG Campus')
+   );
+11.Display the names of students who are from mechanical department(dep_id-111) but not from CEG Campus(clg_code-001)
+-> select stu_name from student where stu_id in(
+   select stu_id from student where dep_id=111
+   except
+   select a.stu_id from student a,joins b where a.stu_id=b.stu_id and a.dep_id=111 and b.clg_code=1);
+12.Display the joining date of every student in the form of 'YYYY-MONTH-DD'
+-> select stu_name,to_char(join_date,'YYYY-MONTH-DD') from student s,joins j where s.stu_id=j.stu_id;
+13.Display the number of months between the Collection date and Joining date of Vivin Krishna
+-> select age(join_date,col_date) from joins j,collects c where j.stu_id=c.t_id and j.stu_id in(select stu_id from student where stu_name='Vivin Krishna'); 
+14.Display the Department wise count of students
+-> select dep_name,count(stu_id) from department d,student s where d.dep_id=s.dep_id group by dep_name;
+15. Display the details of student who have the same joining date and fees collection date
+-> select * from student where stu_id in(select stu_id from joins j,collects c where j.stu_id=c.t_id and j.join_date=c.col_date);

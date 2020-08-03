@@ -1,0 +1,168 @@
+Funtions
+1.Return the average course fee
+declare
+av number;
+function findAvg
+return number
+is
+aveg number;
+begin
+select avg(course_fee) into aveg from course;
+return aveg;
+end;
+begin
+av:=findAvg();
+dbms_output.put_line('Average course fee is: ' || av);
+end;
+/
+2.Return the number of symposiums conducted in PSG Tech
+declare
+cnt number;
+function findCount
+return number
+is
+cou number;
+begin
+select count(symp_name) into cou from symposium where clg_code=(
+select clg_code from college where clg_name='PSG Tech');
+return cou;
+end;
+begin
+cnt:=findCount();
+dbms_output.put_line('Count of symposiums: ' || cnt);
+end;
+/
+3.Return the Chief guest of symposium given as input
+declare
+chf_guest varchar(20);
+dep_name varchar(20);
+department_name varchar(20);
+function returndepartment(chf_guest in varchar)
+return varchar
+is
+begin
+select dep_name into department_name from department where dep_id in(
+select dep_id from symposium where chief_guest like chf_guest);
+return department_name;
+end;
+begin
+chf_guest:=&chf_guest;
+dep_name:=returndepartment(chf_guest);
+dbms_output.put_line(dep_name);
+end;
+/
+
+4.When did Gokkul Pay the fees?
+declare
+coll_date date;
+col_date date;
+name varchar(20);
+function returncolldate(name in varchar)
+return date
+is
+begin
+select col_date into coll_date from collects where t_id in(
+select stu_id from student where stu_name like name);
+return coll_date;
+end;
+begin
+name:=&name;
+col_date:=returncolldate(name);
+dbms_output.put_line(col_date);
+end;
+/
+
+Procedures:
+5.Reduce the tution fee of CEG students by 1000
+declare
+roll number(10);
+cursor fees is
+select * from fees where t_id in(
+select stu_id from joins where clg_code in(
+select clg_code from college where clg_name='CEG Campus'));
+cur_fee fees%rowtype;
+procedure updatefees(roll in number) is
+begin
+update fees
+set tution_fee=tution_fee-1000
+where t_id=roll;
+end;
+begin
+open fees;
+loop
+fetch fees into cur_fee;
+exit when fees%notfound;
+roll:=cur_fee.t_id;
+updatefees(roll);
+end loop;
+close fees;
+end;
+/
+
+6.Find the symposiums conducted if the department is given
+declare
+symposium_name symposium.symp_name%type;
+department_name department.dep_name%type;
+procedure findsymposium(department_name in varchar) is
+cursor symp is
+select * from symposium where dep_id in(
+select dep_id from department where dep_name like department_name);
+cur_symp symp%rowtype;
+begin
+open symp;
+loop
+fetch symp into cur_symp;
+exit when symp%notfound;
+symposium_name:=cur_symp.symp_name;
+dbms_output.put_line(symposium_name);
+end loop;
+close symp;
+end;
+begin
+department_name:=&department_name;
+findsymposium(department_name);
+end;
+/
+7.Display the total fees of the student given as input
+declare
+name varchar(20);
+a number;
+b number;
+c number;
+d number;
+tot number;
+roll number;
+procedure findroll(name in varchar,roll out number) is
+begin
+select stu_id into roll from student where stu_name like name;
+end;
+procedure findfees(roll in number,tot in out number) is
+begin
+select tution_fee,hostel_fee,transport_fee,other into a,b,c,d from fees where t_id=roll;
+tot:=a+b+c+d;
+end;
+begin
+name:=&name;
+findroll(name,roll);
+findfees(roll,tot);
+dbms_output.put_line(tot);
+end;
+/
+8.Display the name of student along with join date
+declare
+procedure findjoindetails is
+cursor join_details is
+select stu_name,join_date from student  inner join joins on student.stu_id=joins.stu_id;
+cur_join join_details%rowtype;
+begin
+open join_details;
+loop
+fetch join_details into cur_join;
+exit when join_details%notfound;
+dbms_output.put_line(cur_join.stu_name || ' ' || cur_join.join_date);
+end loop;
+end;
+begin
+findjoindetails();
+end;
+/

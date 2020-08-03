@@ -1,0 +1,74 @@
+Entity:Student
+create table student(
+stu_id number(10),
+stu_name varchar(30),
+address varchar(50),
+phone number(10),
+dep_id int,
+primary key(stu_id),
+foreign key(dep_id) references department(dep_id)
+);
+Entity:College
+create table college(
+clg_code number(4),
+clg_name varchar(30),
+location varchar(50),
+head varchar(30),
+primary key(clg_code)
+);
+Entity:Fees
+create table fees(
+t_id number(10),
+tution_fee number(10),
+hostel_fee number(10),
+transport_fee number(10),
+other number(10),
+primary key(t_id)
+);
+Entity:Course
+create table course(
+course_id number(4),
+course_name varchar(20),
+course_fee number(4),
+dep_id number(4),
+primary key(course_id),
+foreign key(dep_id) references department(dep_id)
+);
+Entity:Department
+create table department(
+dep_id number(4),
+dep_name varchar(15),
+hod varchar(30),
+primary key(dep_id)
+);
+Entity:Symposium
+create table symposium(
+dep_id number(4),
+symp_name varchar(20),
+clg_code int,
+chief_guest varchar(30),
+tech_event_no number(2),
+non_tech_event_no number(2),
+cost number(6),
+primary key(dep_id,clg_code),
+foreign key(dep_id) references department(dep_id) on delete cascade,
+foreign key(clg_code) references college(clg_code) on delete cascade
+);
+Relation:Joins
+create table joins(
+stu_id number(10),
+clg_code int,
+join_date date,
+primary key(stu_id,clg_code),
+foreign key(stu_id) references student(stu_id),
+foreign key(clg_code) references college(clg_code)
+);
+Relation:Collects
+create table collects(
+col_date date,
+t_id number(10),
+clg_code number(4),
+primary key(t_id,clg_code),
+foreign key(t_id) references fees(t_id),
+foreign key(clg_code) references college(clg_code)
+);

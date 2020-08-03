@@ -1,0 +1,64 @@
+Colleges:
+insert into college(clg_code,clg_name,location,head) values(001,'CEG Campus','Chennai','Dr.T.V.Geetha');
+insert into college(clg_code,clg_name,location,head) values(2006,'PSG Tech','Coimbatore','Dr.R.Rudramoorthy');
+insert into college(clg_code,clg_name,location,head) values(2722,'Sri Krishna','Coimbatore','Smt.S.Malarvizhi');
+Departments:
+insert into department(dep_id,dep_name) values(103,'CSE');
+insert into department(dep_id,dep_name) values(105,'ECE');
+insert into department(dep_id,dep_name) values(111,'Mechanical');
+insert into department(dep_id,dep_name) values(109,'IT');
+Students:
+insert into student(stu_id,stu_name,address,phone,dep_id) values(2017103560,'Nikhil Kumar','1/347, NGGO Colony, Coimbatore-22',9159268103,103);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(2017105025,'Kavin Raj','No:20, Anna Nagar, Chennai-40',7708829328,105);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(2017103525,'Gokkul','95-C, Chromepet, Chennai-44',7418767287,103);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(1523789209,'Vivin Krishna','5/34, VKL Street, Coimbatore-22',8608016000,105);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(3525109521,'Sabari Nathan','No:20-A, Periyanaickenpalayam, Coimbatore-20',8428937991,111);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(1046220964,'Naveena','Door no:66/3, SRKV post, Coimbatore-20',9940958417,109);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(2017111563,'Pothikannan','No:43, Velachery, Chennai-45',9500702083,111);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(4520361042,'Sri Devi','House no:50-A, Subramaniyapuram, Trichy-40',9962847811,109);
+insert into student(stu_id,stu_name,address,phone,dep_id) values(3621784632,'Harsha Vardhiny','1/12, G.Koundampalayam, Coimbatore-20',9600808189,103);
+Course:
+insert into course(course_id,course_name,course_fee,dep_id) values(3157,'Maths-1',1200,100);
+insert into course(course_id,course_name,course_fee,dep_id) values(3252,'EG',1350,111);
+insert into course(course_id,course_name,course_fee,dep_id) values(3215,'EDC',1000,105);
+insert into course(course_id,course_name,course_fee,dep_id) values(3321,'Solid Mechanics',950,111);
+insert into course(course_id,course_name,course_fee,dep_id) values(3478,'Web Design',1000,109);
+insert into course(course_id,course_name,course_fee,dep_id) values(3411,'Comp_Architecture',1300,103);
+Symposium:
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(103,'Abacus',1,'Mayilsamy',6,5,200000);
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(105,'Vision',1,'Vijay',5,5,150000);
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(111,'Pinnacle',1,'Madan Gowri',7,4,300000);
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(109,'Itrix',1,'Shivsubramanya Nadar',5,6,250000);
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(111,'Mecho-Fest',2006,'Aadhi',5,4,175000);
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(103,'Computerize',2006,'Mohan Raja',5,5,160000);
+insert into symposium(dep_id,symp_name,clg_code,chief_guest,tech_event_no,non_tech_event_no,cost) values(109,'Informate',2722,'Sundar Pichai',5,3,155000);
+Fees:
+insert into fees(t_id,tution_fee,hostel_fee,other) values(2017103560,30000,60000,7000);
+insert into fees(t_id,tution_fee,hostel_fee,other) values(2017105025,35000,60000,8000);
+insert into fees(t_id,tution_fee,transport_fee,other) values(2017103525,30000,20000,7000);
+insert into fees(t_id,tution_fee,transport_fee,other) values(1523789209,70000,30000,10000);
+insert into fees(t_id,tution_fee,hostel_fee,other) values(3525109521,60000,45000,3000);
+insert into fees(t_id,tution_fee,transport_fee,other) values(1046220964,100000,30000,15000);
+insert into fees(t_id,tution_fee,transport_fee,other) values(2017111563,15000,20000,4000);
+insert into fees(t_id,tution_fee,hostel_fee,other) values(4520361042,25000,40000,5000);
+insert into fees(t_id,tution_fee,hostel_fee,other) values(3621784632,30000,60000,3000);
+Joins:
+insert into joins(stu_id,clg_code,join_date) values(2017103560,001,'01Jul2017');
+insert into joins(stu_id,clg_code,join_date) values(2017105025,001,'01Jul2017');
+insert into joins(stu_id,clg_code,join_date) values(2017103525,001,'01Jul2017');
+insert into joins(stu_id,clg_code,join_date) values(1523789209,2006,'25Jul2017');
+insert into joins(stu_id,clg_code,join_date) values(3525109521,2006,'25Jul2017');
+insert into joins(stu_id,clg_code,join_date) values(1046220964,2722,'10Aug2017');
+insert into joins(stu_id,clg_code,join_date) values(2017111563,001,'01Jul2017');
+insert into joins(stu_id,clg_code,join_date) values(4520361042,2722,'10Aug2017');
+insert into joins(stu_id,clg_code,join_date) values(3621784632,0001,'01Jul2017');
+Collects:
+insert into collects(col_date,t_id,clg_code) values('25Jun2017',2017103560,001);
+insert into collects(col_date,t_id,clg_code) values('27Jun2017',2017105025,001);
+insert into collects(col_date,t_id,clg_code) values('20Jun2017',2017103525,001);
+insert into collects(col_date,t_id,clg_code) values('20Jul2017',1523789209,2006);
+insert into collects(col_date,t_id,clg_code) values('10Jul2017',3525109521,2006);
+insert into collects(col_date,t_id,clg_code) values('01Aug2017',1046220964,2722);
+insert into collects(col_date,t_id,clg_code) values('25Jun2017',2017111563,001);
+insert into collects(col_date,t_id,clg_code) values('22Jul2017',4520361042,2722);
+insert into collects(col_date,t_id,clg_code) values('01Jul2017',3621784632,0001);
